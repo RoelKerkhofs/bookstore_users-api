@@ -8,6 +8,6 @@ func GetUser() {
 
 }
 
-func FindUser() {
-  
+func SearchUser() {
+
 }
