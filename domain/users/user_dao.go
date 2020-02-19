@@ -9,10 +9,10 @@ var (
 	usersDB = make(map[int64]*User)
 )
 
-func (user *User) Get(userId int64) *errors.RestErr {
-	result := usersDB[userId]
+func (user *User) Get() *errors.RestErr {
+	result := usersDB[user.ID]
 	if result == nil {
-		return errors.NewBadRequestError(fmt.Sprintf("user id %d not found", userId))
+		return errors.NewBadRequestError(fmt.Sprintf("user id %d not found", user.ID))
 	}
 
 	user.ID = result.ID
