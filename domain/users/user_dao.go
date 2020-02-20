@@ -11,6 +11,7 @@ var (
 
 func (user *User) Get() *errors.RestErr {
 	result := usersDB[user.ID]
+
 	if result == nil {
 		return errors.NewBadRequestError(fmt.Sprintf("user id %d not found", user.ID))
 	}
@@ -32,6 +33,7 @@ func (user *User) Save() *errors.RestErr {
 		}
 		return errors.NewBadRequestError(fmt.Sprintf("User id %d already exists", user.ID))
 	}
+
 	usersDB[user.ID] = user
 	return nil
 }

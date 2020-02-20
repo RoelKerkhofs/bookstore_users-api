@@ -4,7 +4,6 @@ import (
 	"bookstore/bookstore_users-api/domain/users"
 	"bookstore/bookstore_users-api/services"
 	"bookstore/bookstore_users-api/utils/errors"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -27,7 +26,6 @@ func CreateUser(c *gin.Context) {
 
 func GetUser(c *gin.Context) {
 	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
-	fmt.Println(userId, userErr)
 
 	if userErr != nil {
 		err := errors.NewBadRequestError("User Id should be a number")

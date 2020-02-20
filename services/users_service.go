@@ -3,6 +3,7 @@ package services
 import (
 	"bookstore/bookstore_users-api/domain/users"
 	"bookstore/bookstore_users-api/utils/errors"
+	"fmt"
 )
 
 func CreateUser(user users.User) (*users.User, *errors.RestErr) {
@@ -20,7 +21,7 @@ func CreateUser(user users.User) (*users.User, *errors.RestErr) {
 func GetUser(userId int64) (*users.User, *errors.RestErr) {
 
 	result := &users.User{ID: userId}
-
+	fmt.Println("service", string(userId))
 	if err := result.Get(); err != nil {
 		return nil, err
 	}
