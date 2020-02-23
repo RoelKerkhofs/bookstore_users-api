@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func CreateUser(c *gin.Context) {
+func Create(c *gin.Context) {
 	var user users.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		restErr := errors.NewBadRequestError("invalid json body")
@@ -24,7 +24,7 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, result)
 }
 
-func GetUser(c *gin.Context) {
+func Get(c *gin.Context) {
 	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
 
 	if userErr != nil {
@@ -41,7 +41,7 @@ func GetUser(c *gin.Context) {
 
 }
 
-func UpdateUser(c *gin.Context) {
+func Update(c *gin.Context) {
 	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
 
 	if userErr != nil {
@@ -68,6 +68,10 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, result)
+}
+
+func Delete(c *gin.Context) {
+	c.String(http.StatusNotImplemented, "Delete User Route")
 }
 
 func SearchUser(c *gin.Context) {
