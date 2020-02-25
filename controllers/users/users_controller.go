@@ -31,7 +31,7 @@ func Create(c *gin.Context) {
 		c.JSON(saveErr.Status, saveErr)
 		return
 	}
-	c.JSON(http.StatusCreated, result)
+	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-public") == "true"))
 }
 
 func Get(c *gin.Context) {
@@ -75,7 +75,7 @@ func Update(c *gin.Context) {
 		c.JSON(err.Status, err)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-public") == "true"))
 }
 
 func Delete(c *gin.Context) {
@@ -93,10 +93,6 @@ func Delete(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]string{"status": "deleted"})
 }
 
-func SearchUser(c *gin.Context) {
-	c.String(http.StatusNotImplemented, "Search User Route")
-}
-
 func Search(c *gin.Context) {
 	status := c.Query("status")
 
@@ -105,5 +101,6 @@ func Search(c *gin.Context) {
 		c.JSON(err.Status, err.Message)
 		return
 	}
-	c.JSON(http.StatusOK, users)
+
+	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-public") == "true"))
 }
