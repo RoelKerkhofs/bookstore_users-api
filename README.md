@@ -1,5 +1,5 @@
 # bookstore_users-api
-A microservice to govern the user domain as specified in the tutorial <a href="https://www.udemy.com/course/golang-how-to-design-and-build-rest-microservices-in-go">Microservices in Go - Part 2</a>
+A microservice to govern the user domain as specified in the tutorial [Microservices in Go - Part 2](https://www.udemy.com/course/golang-how-to-design-and-build-rest-microservices-in-go)
 ## Getting Started
 
 The microservice should run out of the box once you set the environment variables
