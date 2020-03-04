@@ -4,7 +4,9 @@ import (
 	"bookstore/bookstore_users-api/datasources/mysql/users_db"
 	"bookstore/bookstore_users-api/logger"
 	"bookstore/bookstore_users-api/utils/errors"
+	"bookstore/bookstore_users-api/utils/mysql_utils"
 	"fmt"
+	"strings"
 )
 
 const (
@@ -127,6 +129,9 @@ func (user *User) FindByEmailAndPAssword() *errors.RestErr {
 
 	result := stmt.QueryRow(user.Email, user.Password)
 	if getErr := result.Scan(&user.ID, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); getErr != nil {
+		if strings.Contains(getErr.Error(), mysql_utils.ErrorNoRows) {
+			return errors.NewNotFoundError("invalid user credentials")
+		}
 		logger.Error("Error when trying to get user by email and password", getErr)
 		return errors.NewNotFoundError("ID niet gevonden")
 	}
